@@ -311,3 +311,15 @@ button:active {
   margin-right: auto;
   border: 1px solid;
 }
+
+.alert-danger {
+  color: red;
+}
+
+.alert-warning {
+  color: orange;
+}
+
+.alert-success {
+  color: green;
+}

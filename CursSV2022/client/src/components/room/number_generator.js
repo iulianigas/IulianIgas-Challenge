@@ -1,21 +1,44 @@
 import { useState } from "react";
 
-const NumberGenerator = () => {
-  const [number, setNumber] = useState();
+let randomNumber = Math.round(Math.random() * 10);
 
-  function randomNumberInRange(min, max) { 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+const NumberGenerator = () => {
+  const [value, setValue] = useState("");
+  const [results, setResults] = useState("");
 
   const handleClick = () => {
-    setNumber(randomNumberInRange(1, 20));
+    const userGuess = parseInt(value, setValue);
+
+    setResults(<p className="alert-danger">Enter a number!</p>);
+
+    if (userGuess === randomNumber) {
+      setResults(<p className="alert-success">Correct!</p>);
+    }
+
+    if (userGuess > randomNumber) {
+      setResults(<p className="alert-warning">Too high, guess again!</p>);
+
+    }
+
+    if (userGuess < randomNumber) {
+      setResults(<p className="alert-warning">Too low, guess again!</p>);  
+    }
   }
 
   return (
     <div className="entertainment">
-      <p>Have fun until other player joins and generate a random number!</p>
-      <p>Your number is: {number} </p>
-      <button onClick={handleClick}> Generate a random number between 1 and 20 </button>
+      <p>Have fun until other player joins and guess a number between 1 and 10!</p>
+      <input
+        value={value}
+        type="number"
+        onChange={e => setValue(e.target.value)}
+      />
+      <button type="submit" onClick={handleClick}>
+        Guess the number
+      </button>
+      <br />
+      <br />
+      {results}
     </div>
   );
 };
